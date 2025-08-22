@@ -1,3 +1,6 @@
+<!-- git remote add origin https://github.com/Hamim470/assignment-10.git -->
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

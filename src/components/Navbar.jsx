@@ -19,7 +19,7 @@ const Navbar = () => {
       <motion.li whileHover={{ scale: 1.1 }}>
         <NavLink
           to="/"
-          className="hover:text-blue-500 text-blue-800 bg-blue-100 p-1 rounded-sm hover:bg-blue-200 font-medium"
+          className="hover:text-blue-500 text-blue-800 bg-blue-100 py-1 px-3 rounded-sm hover:bg-blue-200 font-medium"
         >
           Home
         </NavLink>
@@ -27,7 +27,7 @@ const Navbar = () => {
       <motion.li whileHover={{ scale: 1.1 }}>
         <NavLink
           to="/all-tourist-spots"
-          className="hover:text-blue-500 text-blue-800 bg-blue-100 p-1 rounded-sm hover:bg-blue-200 font-medium"
+          className="hover:text-blue-500 text-blue-800 bg-blue-100 py-1 px-3 rounded-sm hover:bg-blue-200 font-medium"
         >
           All Tourist Spots
         </NavLink>
@@ -37,7 +37,7 @@ const Navbar = () => {
           <motion.li whileHover={{ scale: 1.1 }}>
             <NavLink
               to="/add-tourist-spot"
-              className="hover:text-blue-500 text-blue-800 bg-blue-100 p-1 rounded-sm hover:bg-blue-200 font-medium"
+              className="hover:text-blue-500 text-blue-800 bg-blue-100 py-1 px-3 rounded-sm hover:bg-blue-200 font-medium"
             >
               Add Tourist Spot
             </NavLink>
@@ -45,7 +45,7 @@ const Navbar = () => {
           <motion.li whileHover={{ scale: 1.1 }}>
             <NavLink
               to="/my-list"
-              className="hover:text-blue-500 text-blue-800 bg-blue-100 p-1 rounded-sm hover:bg-blue-200 font-medium"
+              className="hover:text-blue-500 text-blue-800 bg-blue-100 py-1 px-3 rounded-sm hover:bg-blue-200 font-medium"
             >
               My List
             </NavLink>
@@ -89,7 +89,7 @@ const Navbar = () => {
                 <motion.img
                   src={user.photoURL || "https://i.ibb.co/4Y3QX7p/default-avatar.png"}
                   alt="User Avatar"
-                  className="w-10 h-10 rounded-full border"
+                  className="w-10 h-10 rounded-full border object-cover"
                   whileHover={{ scale: 1.2, rotate: 360 }}
                   transition={{ duration: 0.5 }}
                 />
@@ -154,7 +154,7 @@ const Navbar = () => {
         initial={{ y: -300, opacity: 0 }}
         animate={tabletMenuOpen ? { y: 0, opacity: 1 } : { y: -300, opacity: 0 }}
         transition={{ duration: 0.4 }}
-        className="hidden md:flex lg:hidden absolute top-14 left-0 w-full bg-white bg-opacity-90 backdrop-blur-md shadow-lg z-40"
+        className="hidden md:flex lg:hidden absolute top-14 left-0 w-full bg-white bg-opacity-90 backdrop-blur-md shadow-lg z-40 md:justify-between"
       >
         <ul className="flex flex-col space-y-4 p-4 text-lg text-black">{navLinks}</ul>
 
