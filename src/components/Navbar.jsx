@@ -19,7 +19,9 @@ const Navbar = () => {
       <motion.li whileHover={{ scale: 1.1 }}>
         <NavLink
           to="/"
-          className="hover:text-blue-500 text-blue-800 bg-blue-100 py-1 px-3 rounded-sm hover:bg-blue-200 font-medium"
+          className={({isActive})=>(
+            `hover:text-blue-500  py-1 px-3 rounded-sm hover:bg-gray-300 font-medium ${isActive? 'text-blue-900 bg-gray-300 ':'text-blue-600 bg-gray-100'}`
+          )}
         >
           Home
         </NavLink>
@@ -27,7 +29,9 @@ const Navbar = () => {
       <motion.li whileHover={{ scale: 1.1 }}>
         <NavLink
           to="/all-tourist-spots"
-          className="hover:text-blue-500 text-blue-800 bg-blue-100 py-1 px-3 rounded-sm hover:bg-blue-200 font-medium"
+           className={({isActive})=>(
+            `hover:text-blue-500  py-1 px-3 rounded-sm hover:bg-gray-300 font-medium ${isActive? 'text-blue-900 bg-gray-300 ':'text-blue-600 bg-gray-100'}`
+          )}
         >
           All Tourist Spots
         </NavLink>
@@ -37,16 +41,18 @@ const Navbar = () => {
           <motion.li whileHover={{ scale: 1.1 }}>
             <NavLink
               to="/add-tourist-spot"
-              className="hover:text-blue-500 text-blue-800 bg-blue-100 py-1 px-3 rounded-sm hover:bg-blue-200 font-medium"
-            >
+                className={({isActive})=>(
+            `hover:text-blue-500  py-1 px-3 rounded-sm hover:bg-gray-300 font-medium ${isActive? 'text-blue-900 bg-gray-300 ':'text-blue-600 bg-gray-100'}`
+          )}>
               Add Tourist Spot
             </NavLink>
           </motion.li>
           <motion.li whileHover={{ scale: 1.1 }}>
             <NavLink
               to="/my-list"
-              className="hover:text-blue-500 text-blue-800 bg-blue-100 py-1 px-3 rounded-sm hover:bg-blue-200 font-medium"
-            >
+               className={({isActive})=>(
+            `hover:text-blue-500  py-1 px-3 rounded-sm hover:bg-gray-300 font-medium ${isActive? 'text-blue-900 bg-gray-300 ':'text-blue-600 bg-gray-100'}`
+          )}>
               My List
             </NavLink>
           </motion.li>

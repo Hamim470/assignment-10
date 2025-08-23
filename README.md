@@ -1,15 +1,24 @@
 <!-- git remote add origin https://github.com/Hamim470/assignment-10.git -->
 
 
-# React + Vite
+# Explore Southeast Asia 🌏  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live Site: [https://explore-southeast-asia.vercel.app](https://explore-southeast-asia.vercel.app)  
 
-Currently, two official plugins are available:
+## ✨ Features  
+- Browse breathtaking tourist spots across Southeast Asia.  
+- Add your own tourist spots (Private/Protected Route).  
+- Manage your personal list of added spots (Private/Protected Route).  
+- Secure Authentication using Firebase (Google & Email/Password).  
+- Responsive design for Mobile, Tablet, and Desktop.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tech Stack  
+- **Frontend**: React + Tailwind CSS + React Router  
+- **Backend**: Node.js + Express.js  
+- **Database**: MongoDB Atlas  
+- **Authentication**: Firebase Auth  
+- **Deployment**: Vercel (frontend) & Render (backend)  
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🔒 Environment Variables  
+- Firebase config keys  
+- MongoDB credentials  
