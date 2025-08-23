@@ -20,23 +20,25 @@ const ALLOWED_COUNTRIES = [
   "Cambodia",
 ];
 
-const SLIDES = [
-  {
-    img: "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?q=80&w=1600&auto=format&fit=crop",
-    title: "Ha Long Bay, Vietnam",
-    caption: "Sail through emerald waters and limestone pillars.",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1600&auto=format&fit=crop",
-    title: "Phi Phi Islands, Thailand",
-    caption: "Turquoise lagoons and dramatic cliffs await.",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1558980664-10ea9c90a86a?q=80&w=1600&auto=format&fit=crop",
-    title: "Cox’s Bazar, Bangladesh",
-    caption: "Walk the world’s longest natural sea beach.",
-  },
-];
+
+
+// const SLIDES = [
+//   {
+//     img: "https://images.unsplash.com/photo-1589308078059-be1415eab4c3?q=80&w=1600&auto=format&fit=crop",
+//     title: "Ha Long Bay, Vietnam",
+//     caption: "Sail through emerald waters and limestone pillars.",
+//   },
+//   {
+//     img: "https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=1600&auto=format&fit=crop",
+//     title: "Phi Phi Islands, Thailand",
+//     caption: "Turquoise lagoons and dramatic cliffs await.",
+//   },
+//   {
+//     img: "https://images.unsplash.com/photo-1558980664-10ea9c90a86a?q=80&w=1600&auto=format&fit=crop",
+//     title: "Cox’s Bazar, Bangladesh",
+//     caption: "Walk the world’s longest natural sea beach.",
+//   },
+// ];
 
 const Home = () => {
   const navigate = useNavigate();
@@ -50,16 +52,26 @@ const Home = () => {
   const [loadingCountries, setLoadingCountries] = useState(true);
   const [errorSpots, setErrorSpots] = useState("");
   const [errorCountries, setErrorCountries] = useState("");
+  const [SLIDES,setSLIDES]=useState([]);
 
   const API_BASE = import.meta.env.VITE_API_BASE_URL; // e.g., http://localhost:5000
 
-  // Auto-advance slider
+  useEffect(() => {
+    fetch(`${API_BASE}/all_tourist_spots`)
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+      setSLIDES(data);
+    })
+  }, [])
+
+    // Auto-advance slider
   useEffect(() => {
     const id = setInterval(() => {
       setSlide((s) => (s + 1) % SLIDES.length);
     }, 4500);
     return () => clearInterval(id);
-  }, []);
+  }, [SLIDES]);
 
   // Theme persist for home page only
   useEffect(() => {
@@ -155,13 +167,13 @@ const Home = () => {
           <div className="relative h-[68vh] md:h-[72vh] overflow-hidden">
             {SLIDES.map((s, idx) => (
               <motion.div
-                key={s.title}
+                key={s.tourists_spot_name}
                 className="absolute inset-0"
                 initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: idx === slide ? 1 : 0, scale: idx === slide ? 1 : 1.05 }}
                 transition={{ duration: 0.8 }}
                 style={{
-                  backgroundImage: `url(${s.img})`,
+                  backgroundImage: `url(${s.image})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
@@ -227,9 +239,8 @@ const Home = () => {
                 <button
                   key={i}
                   onClick={() => setSlide(i)}
-                  className={`h-2.5 w-2.5 rounded-full ${
-                    i === slide ? "bg-white" : "bg-white/50 hover:bg-white/80"
-                  }`}
+                  className={`h-2.5 w-2.5 rounded-full ${i === slide ? "bg-white" : "bg-white/50 hover:bg-white/80"
+                    }`}
                 />
               ))}
             </div>
