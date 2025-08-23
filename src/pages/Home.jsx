@@ -73,10 +73,6 @@ const Home = () => {
     return () => clearInterval(id);
   }, [SLIDES]);
 
-  // Theme persist for home page only
-  useEffect(() => {
-    localStorage.setItem("homeTheme", dark ? "dark" : "light");
-  }, [dark]);
 
   // Fetch Tourist Spots (limit to SEA)
   useEffect(() => {
@@ -156,10 +152,9 @@ const Home = () => {
     []
   );
 
-  const isDarkClass = dark ? "dark" : "";
 
   return (
-    <div className={`${isDarkClass}`}>
+    <div>
       <div className="min-h-screen bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
         {/* HERO / SLIDER */}
         <section className="relative">
@@ -167,7 +162,7 @@ const Home = () => {
           <div className="relative h-[68vh] md:h-[72vh] overflow-hidden">
             {SLIDES.map((s, idx) => (
               <motion.div
-                key={s.tourists_spot_name}
+                key={idx}
                 className="absolute inset-0"
                 initial={{ opacity: 0, scale: 1.05 }}
                 animate={{ opacity: idx === slide ? 1 : 0, scale: idx === slide ? 1 : 1.05 }}
@@ -194,12 +189,7 @@ const Home = () => {
                 Explore{" "}
                 <span className="text-emerald-300">
                   <Typewriter
-                    words={[
-                      "Southeast Asia",
-                      "Hidden Beaches",
-                      "Ancient Temples",
-                      "Lush Rainforests",
-                    ]}
+                    words={SLIDES.map(slide=>slide.tourists_spot_name)}
                     loop={0}
                     cursor
                     cursorStyle="_"
@@ -245,14 +235,7 @@ const Home = () => {
               ))}
             </div>
 
-            {/* Dark/Light toggle (Home-only) */}
-            <button
-              onClick={() => setDark((d) => !d)}
-              className="absolute top-4 right-4 px-3 py-1.5 rounded-lg bg-black/60 text-white text-sm backdrop-blur hover:bg-black/70"
-              title="Toggle theme (Home page only)"
-            >
-              {dark ? "🌙 Dark" : "☀️ Light"}
-            </button>
+
           </div>
         </section>
 
