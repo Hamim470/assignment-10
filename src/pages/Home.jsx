@@ -42,7 +42,6 @@ const ALLOWED_COUNTRIES = [
 
 const Home = () => {
   const navigate = useNavigate();
-  const [dark, setDark] = useState(() => localStorage.getItem("homeTheme") === "dark");
   const [slide, setSlide] = useState(0);
 
   // Data state
@@ -53,61 +52,31 @@ const Home = () => {
   const [errorSpots, setErrorSpots] = useState("");
   const [errorCountries, setErrorCountries] = useState("");
   const [SLIDES,setSLIDES]=useState([]);
-
+  
   const API_BASE = import.meta.env.VITE_API_BASE_URL; // e.g., http://localhost:5000
-
+  
   useEffect(() => {
     fetch(`${API_BASE}/all_tourist_spots`)
     .then(res=>res.json())
     .then(data=>{
-      console.log(data)
       setSLIDES(data);
     })
   }, [])
 
-    // Auto-advance slider
+  // Auto-advance slider
   useEffect(() => {
     const id = setInterval(() => {
       setSlide((s) => (s + 1) % SLIDES.length);
     }, 4500);
     return () => clearInterval(id);
   }, [SLIDES]);
-
+  
 
   // Fetch Tourist Spots (limit to SEA)
-  useEffect(() => {
-    let ignore = false;
-    setLoadingSpots(true);
-    fetch(`${API_BASE}/spots`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (ignore) return;
-        const filtered = (data || []).filter((s) => ALLOWED_COUNTRIES.includes(s.country_Name));
-        setSpots(filtered.slice(0, 6)); // show 6 on home
-        setErrorSpots("");
-      })
-      .catch((err) => setErrorSpots(err.message || "Failed to load spots"))
-      .finally(() => setLoadingSpots(false));
-    return () => (ignore = true);
-  }, [API_BASE]);
 
+  
   // Fetch Countries (SEA only)
-  useEffect(() => {
-    let ignore = false;
-    setLoadingCountries(true);
-    fetch(`${API_BASE}/countries`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (ignore) return;
-        const filtered = (data || []).filter((c) => ALLOWED_COUNTRIES.includes(c.name));
-        // Ensure we have 6 SEA countries
-        setCountries(filtered.slice(0, 6));
-        setErrorCountries("");
-      })
-      .catch((err) => setErrorCountries(err.message || "Failed to load countries"))
-      .finally(() => setLoadingCountries(false));
-    return () => (ignore = true);
-  }, [API_BASE]);
+
 
   // fallback if your countries API isn’t ready yet (optional)
   const countryFallback = useMemo(
@@ -134,8 +103,8 @@ const Home = () => {
         name: "Malaysia",
         image:
           "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?q=80&w=1600&auto=format&fit=crop",
-        description: "Petronas towers, rainforests, and flavorful cuisine.",
-      },
+          description: "Petronas towers, rainforests, and flavorful cuisine.",
+        },
       {
         name: "Vietnam",
         image:
@@ -145,13 +114,14 @@ const Home = () => {
       {
         name: "Cambodia",
         image:
-          "https://images.unsplash.com/photo-1558980394-0b0e9b70f2a4?q=80&w=1600&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1558980394-0b0e9b70f2a4?q=80&w=1600&auto=format&fit=crop",
         description: "Angkor Wat, floating villages, and royal palaces.",
       },
     ],
     []
   );
 
+  console.log(SLIDES.map(s=>s.tourists_spot_name));
 
   return (
     <div>
@@ -189,7 +159,7 @@ const Home = () => {
                 Explore{" "}
                 <span className="text-emerald-300">
                   <Typewriter
-                    words={SLIDES.map(slide=>slide.tourists_spot_name)}
+                    words={SLIDES.length>0 ? SLIDES.map(slide=>slide.tourists_spot_name):['Loading...']}
                     loop={0}
                     cursor
                     cursorStyle="_"
