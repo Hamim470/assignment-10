@@ -6,7 +6,6 @@
 Live Site: [https://explore-southeast-asia.vercel.app](https://explore-southeast-asia.vercel.app)  
 
 ## ✨ Features  
-- Browse breathtaking tourist spots across Southeast Asia.  
 - Add your own tourist spots (Private/Protected Route).  
 - Manage your personal list of added spots (Private/Protected Route).  
 - Secure Authentication using Firebase (Google & Email/Password).  

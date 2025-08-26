@@ -27,7 +27,7 @@ const MyList = () => {
     const handleDelete = async (id) => {
         const result = await Swal.fire({
             title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            text: "You want to delete this!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
@@ -35,38 +35,41 @@ const MyList = () => {
             confirmButtonText: 'Yes, delete it!',
             cancelButtonText: 'Cancel'
         });
-
         if (result.isConfirmed) {
-            try {
-                const res = await fetch(`${API_BASE}/delete_data/${id}`, {
-                    method: "DELETE",
-                });
-                const data = await res.json();
-                if (data.deletedCount > 0) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Deleted!',
-                        text: 'Tourist spot has been deleted.',
-                        timer: 2000,
-                        showConfirmButton: false
-                    });
-                    setMySpots(mySpots.filter((spot) => spot._id !== id));
-                } else {
+            fetch(`${API_BASE}/delete_data/${id}`, {
+                method: 'DELETE'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Deleted!',
+                            text: 'Tourist spot has been deleted.',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                        setMySpots(mySpots.filter((spot) => spot._id !== id));
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops!',
+                            text: 'Spot could not be deleted.',
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.error("Error deleting spot:", err);
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops!',
-                        text: 'Spot could not be deleted.',
+                        title: 'Error!',
+                        text: 'Something went wrong while deleting.',
                     });
-                }
-            } catch (err) {
-                console.error("Error deleting spot:", err);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: 'Something went wrong while deleting.',
-                });
-            }
+
+                })
         }
+
     };
 
     return (
